@@ -1,0 +1,39 @@
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Solution {
+    public ListNode FindKthToTail(ListNode head,int k) {
+        ListNode p=head;
+        ListNode q=head;
+        if(head == null||k == 0){
+            return null;
+        }
+        int i;
+        if(k==1){
+            q=p;
+            while(q.next!=null){
+            q=q.next;
+            p=p.next;
+            }
+        }
+        else{
+            for(i=1;i<=k;i++){
+                if(q!=null)
+                    q=q.next;
+                else return null;
+            }
+                
+            while(q!=null){
+                q=q.next;
+                p=p.next;
+            }
+        }
+        return p;
+    }
+}

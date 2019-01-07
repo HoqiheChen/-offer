@@ -1,0 +1,18 @@
+public class Solution {
+    public double Power(double base, int exponent) {
+        if(exponent == 0) return 1;
+        if(exponent == 1) return base;
+        boolean neg = false;
+        if(exponent<0){
+            exponent = -exponent;
+            neg = true;
+        }
+        double pow = Power(base,exponent>>1);
+        double result = pow* pow;
+        if(exponent %2 == 1)
+            result *= base;
+        if(neg == true) return 1/result;
+        else
+            return result;
+  }
+}
