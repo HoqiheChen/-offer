@@ -1,0 +1,37 @@
+/**
+ * Definition for binary tree
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+import java.util.HashMap;
+public class Solution {
+    public HashMap<Integer,Integer> index = new HashMap<>();
+    
+    public TreeNode reConstructBinaryTree(int [] pre,int [] in) {
+        for(int i=0;i<in.length;i++){
+            index.put(in[i],i);
+        }
+        
+        return reConstruct(pre,0,pre.length-1,0);
+    }
+    /*
+    pL为前序遍历的开始；
+    pR为前序遍历的结束；
+    inl为中序序列的开始；
+    */
+    public TreeNode reConstruct(int []pre,int pL,int pR,int inL){
+        if(pL>pR)
+            return null;
+        TreeNode root=new TreeNode(pre[pL]);
+        int toor=index.get(root.val);
+        int lsize=toor-inL;
+        root.left=reConstruct(pre,pL+1,pL+lsize,inL);
+        root.right=reConstruct(pre,pL+lsize+1,pR,inL+lsize+1);
+        return root;
+    }
+   
+}

@@ -1,0 +1,30 @@
+import java.util.ArrayList;
+public class Solution {
+    public int minNumberInRotateArray(int [] array) {
+        if(array.length == 0)
+            return 0;
+        int low = 0;
+        int high = array.length-1;
+        int mid = 0;
+        while(low<high){
+            mid = (low+high)/2;
+            if(array[low] == array[high] && array[low]== array[mid]){
+                return find(array,low,high);
+            }
+            if(array[mid]>array[high]){
+                low = mid+1;
+            }
+            else high = mid;
+        }
+        return array[low];
+    }
+    public int find(int[] res,int low,int high){
+        int i=0;
+        int result=res[low];
+        for(i=low;i<high;i++){
+            if(res[i]<result)
+                result = res[i];
+        }
+        return result;
+    }
+}

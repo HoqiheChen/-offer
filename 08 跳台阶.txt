@@ -1,0 +1,19 @@
+public class Solution {
+    public int JumpFloor(int target) {
+        int t1=1;
+        int t2=2;
+        int result=0;
+        if(target == 0)
+            return 0;
+        if(target == 1)
+            return 1;
+        if(target == 2)
+            return 2;
+        for(int i=2;i<target;i++){
+            result = t1 + t2;
+            t1 = t2;
+            t2 = result;
+        }
+        return result;
+    }
+}
