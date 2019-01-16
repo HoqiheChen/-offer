@@ -1,0 +1,36 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.lang.StringBuilder;
+public class Solution {
+    
+    private ArrayList<String> result = new ArrayList<>();
+    
+    public ArrayList<String> Permutation(String str) {
+       if(str==null||str.length()==0)
+           return result;
+        char []chars = str.toCharArray();
+        Arrays.sort(chars);
+        backtracking(chars,new boolean[chars.length],new StringBuilder());
+        return result;
+    }
+    
+    public void  backtracking(char[] chars,boolean[] tag,StringBuilder s){
+        if(s.length()==chars.length){
+            result.add(s.toString());
+            return;
+        }
+        int i=0;
+        for(i=0;i<chars.length;i++){
+            if(tag[i]==true)
+                continue;
+            if(i!=0&&chars[i]==chars[i-1]&&tag[i-1]!=true)
+                continue;
+            tag[i] = true;
+            s.append(chars[i]);
+            backtracking(chars,tag,s);
+            s.deleteCharAt(s.length()-1);
+            tag[i]=false;
+        }
+        
+    }
+}
