@@ -1,0 +1,21 @@
+public class Solution {
+    public int FindGreatestSumOfSubArray(int[] array) {
+        //动态规划问题
+        if(array == null || array.length == 0)
+            return 0;
+        int max = array[0];
+        int sum = array[0];
+        for(int i = 1;i < array.length;i++){
+            sum = max(sum + array[i],array[i]);
+            if(sum >= max){
+                max = sum;
+            }
+        }
+        return max;
+    }
+    
+    public int max(int a,int b){
+        if(a >= b) return a;
+        else return b;
+    }
+}

@@ -1,0 +1,25 @@
+import java.util.ArrayList;
+import java.util.TreeSet;
+import java.util.Iterator;
+public class Solution {
+    public ArrayList<Integer> GetLeastNumbers_Solution(int [] input, int k) {
+        int length = input.length;
+        ArrayList<Integer> list = new ArrayList<>();
+        if(input == null || k > length || length == 0 || k <= 0)
+            return list;
+        TreeSet<Integer> tree = new TreeSet<>();
+        for(int i = 0;i < length;i++){
+            if(tree.size()<k){
+                tree.add(input[i]);
+            }else if(input[i]<tree.last()){
+                tree.remove(tree.last());
+                tree.add(input[i]);
+            }
+        }
+        Iterator<Integer> iterator = tree.iterator();
+        while(iterator.hasNext()){
+            list.add(iterator.next());
+        }
+        return list;
+    }
+}
