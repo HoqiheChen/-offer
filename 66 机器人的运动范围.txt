@@ -1,0 +1,49 @@
+public class Solution {
+    public int movingCount(int threshold, int rows, int cols)
+    {
+        if(threshold<=0||rows<=0||cols<=0)
+            return 0;
+        boolean []visited = new boolean[rows*cols];
+        for(int i=0;i<visited.length;i++){
+            visited[i]=false;
+        }
+        return countlattice(0,0,rows,cols,visited,threshold);
+    }
+    
+    public int countlattice(int row,int col,int rows,int cols,boolean[] visited,int threshold){
+       
+            int count=0;
+//            try {
+				if (checked(row, col, rows, cols, visited, threshold)) {
+					visited[row * cols + col] = true;
+					count = 1 + countlattice(row + 1, col, rows, cols, visited, threshold)
+							+ countlattice(row - 1, col, rows, cols, visited, threshold)
+							+ countlattice(row, col + 1, rows, cols, visited, threshold)
+							+ countlattice(row, col - 1, rows, cols, visited, threshold);
+				} 
+//			} catch (Exception e) {
+//				System.out.println("error");
+//			}
+            return count;
+    }
+    
+    public boolean checked(int row,int col,int rows,int cols,boolean[] visited,int threshold){
+    	return col >= 0 && col < cols
+                && row >= 0 && row < rows
+                && !visited[row * cols + col]
+                && (eachbitsum(col) + eachbitsum(row) <= threshold);
+
+    }
+    
+    public int eachbitsum(int figure){
+        int sum=0;
+        if(figure==0) return 0;
+        else{
+            while(figure>0){
+                sum+=(figure%10);
+                figure/=10;
+            }
+            return sum;
+        }
+    }
+}
