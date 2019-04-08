@@ -1,0 +1,70 @@
+import java.util.ArrayList;
+import java.util.Stack;
+import java.util.LinkedList;
+/*
+public class TreeNode {
+    int val = 0;
+    TreeNode left = null;
+    TreeNode right = null;
+
+    public TreeNode(int val) {
+        this.val = val;
+
+    }
+
+}
+*/
+public class Solution {
+    public ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+    public ArrayList<ArrayList<Integer> > Print(TreeNode pRoot) {
+        ArrayList<Integer> each = new ArrayList<>();
+        Stack<TreeNode> stack1 = new Stack<TreeNode>();
+        Stack<TreeNode> stack2 = new Stack<TreeNode>();
+        if(pRoot == null) return result;
+        stack1.push(pRoot);
+        boolean nowji = true;
+        int toprint = 1;
+        int nextsum = 0;
+        while(stack1.isEmpty() != true || stack2.isEmpty() != true){
+            TreeNode p = stack1.pop();
+            each.add(p.val);
+            if(nowji == false){
+                if(p.right != null){
+                    stack2.push(p.right);
+                    nextsum ++;
+                }
+                if(p.left != null){
+                    stack2.push(p.left);
+                    nextsum ++;
+                }
+            }else if(nowji == true){
+                if(p.left != null){
+                    stack2.push(p.left);
+                    nextsum ++;
+                }
+                if(p.right != null){
+                    stack2.push(p.right);
+                    nextsum ++;
+                }
+            }
+            
+            if(stack1.isEmpty() == true &&stack2.isEmpty() != true){
+                Stack<TreeNode> temp = new Stack<>();
+                temp = stack1;
+                stack1 = stack2;
+                stack2 = temp;
+            }
+            
+            toprint --;
+            if(toprint == 0){
+                result.add(each);
+                each = new ArrayList<>();
+                toprint = nextsum;
+                nextsum = 0;
+                nowji = !(nowji);
+            }
+        }
+        return result;
+    }
+
+}

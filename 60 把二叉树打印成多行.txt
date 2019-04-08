@@ -1,0 +1,53 @@
+import java.util.ArrayList;
+import java.util.Queue;
+import java.util.LinkedList;
+/*
+public class TreeNode {
+    int val = 0;
+    TreeNode left = null;
+    TreeNode right = null;
+
+    public TreeNode(int val) {
+        this.val = val;
+
+    }
+
+}
+*/
+public class Solution {
+    ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+    ArrayList<ArrayList<Integer> > Print(TreeNode pRoot) {
+        Queue<TreeNode> queue = new LinkedList<>();
+        ArrayList<Integer> array = new ArrayList<>();
+        if(pRoot == null)
+            return result;
+        
+        queue.offer(pRoot);
+        int nextnum = 0;
+        int toprint = 1;
+        while(queue.isEmpty() != true){
+            
+            TreeNode p = queue.poll();
+            array.add(p.val);
+            if(p.left != null){
+                queue.offer(p.left);
+                nextnum ++;
+            }
+            if(p.right != null){
+                queue.offer(p.right);
+                nextnum ++;
+            }
+            
+            toprint --;
+            if(toprint == 0){
+                result.add(array);
+                toprint = nextnum;
+                nextnum = 0;
+                array = new ArrayList<Integer>();
+            }
+            
+        }
+        return result;
+    }
+    
+}
