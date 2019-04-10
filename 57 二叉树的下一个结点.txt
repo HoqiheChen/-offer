@@ -1,0 +1,38 @@
+/*
+public class TreeLinkNode {
+    int val;
+    TreeLinkNode left = null;
+    TreeLinkNode right = null;
+    TreeLinkNode next = null;
+
+    TreeLinkNode(int val) {
+        this.val = val;
+    }
+}
+*/
+public class Solution {
+    /*
+        如果有该结点有右子树，则它的下个结点就是右子树中最左边的结点；
+        否则，找它的祖先结点中的第一个作为左子树的那个祖先结点；
+    */
+    public TreeLinkNode GetNext(TreeLinkNode pNode)
+    {
+        if(pNode.right!=null){
+            TreeLinkNode l=pNode.right;
+            while(l.left!=null){
+                l=l.left;
+            }
+            return l;
+        }
+        else{
+            while(pNode.next!=null){
+                TreeLinkNode parent=pNode.next;
+                if(parent.left==pNode){
+                    return parent;
+                }
+                pNode=pNode.next;
+            }
+            return null;
+        }
+    }
+}
