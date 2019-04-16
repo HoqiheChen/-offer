@@ -1,0 +1,27 @@
+/*
+ public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+*/
+public class Solution {
+    public ListNode deleteDuplication(ListNode pHead)
+    {
+        if(pHead == null||pHead.next == null) return pHead;
+        ListNode q = pHead.next;
+        if(pHead.val == q.val){
+            while(q!=null&&pHead.val==q.val){
+                q=q.next;
+            }
+            return deleteDuplication(q);
+        }
+        else{
+            pHead.next=deleteDuplication(pHead.next);
+            return pHead;
+        }
+    }
+}

@@ -1,0 +1,54 @@
+/*
+ public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+*/
+public class Solution {
+
+    public ListNode EntryNodeOfLoop(ListNode pHead)
+    {
+        if(pHead == null)
+            return pHead;
+        ListNode firstmeet = MeetNode(pHead);
+        if(firstmeet == null) return firstmeet;
+        int count = 1;//记录环中的结点数
+        ListNode countnum = firstmeet;
+        while(countnum.next != firstmeet){
+            countnum = countnum.next;
+            count ++;
+        }
+        
+        ListNode slow = pHead;
+        ListNode fast = pHead;
+        for(int i = 0;i < count;i++){
+            fast = fast.next;
+        }
+        while(slow != fast){
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return fast;
+    }
+    
+    public ListNode MeetNode(ListNode p){
+        if(p == null){
+            return p;
+        }
+        ListNode slow = p.next;
+        if(slow == null) return slow;
+        ListNode fast = slow.next;
+        if(fast == null) return fast;
+        while(slow != null && fast != null){
+            if(fast == slow) return fast;
+            slow = slow.next;
+            fast = fast.next;
+            if(fast != null) fast = fast.next;
+        }
+        return null;
+    }
+}
