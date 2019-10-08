@@ -1,0 +1,46 @@
+//num1,num2分别为长度为1的数组。传出参数
+//将num1[0],num2[0]设置为返回结果
+public class Solution {
+    public int[] part1;
+    public int[] part2;
+    public void FindNumsAppearOnce(int [] array,int num1[] , int num2[]) {
+       if(array.length == 0)
+           return ;
+        
+        int sum = 0;
+        for(int i = 0;i < array.length;i++){
+            sum = sum ^ array[i];
+        }
+        int index = FindFirstBit(sum);
+        int result1 = 0;
+        int result2 = 0;
+        for(int i = 0;i < array.length;i++){
+            if(isBit1(array[i],index) == true){
+                result1 = result1 ^ array[i];
+            }else{
+                result2 = result2 ^ array[i];
+            }
+        }
+        num1[0] = result1;
+        num2[0] = result2;
+    }
+    
+    public int FindFirstBit(int num){
+        if(num == 0)
+            return -1;
+        int index = 0;
+        while((num&1) == 0){
+            num = num >> 1;
+            index ++;
+        }
+        return index;
+    }
+    
+    public boolean isBit1(int num,int index){
+        num = num >> index;
+        if((num&1) == 1){
+            return true;
+        }
+        else return false;
+    } 
+}

@@ -1,0 +1,40 @@
+public class Solution {
+    private long result = 0;
+    public int InversePairs(int [] array) {
+        if(array.length == 0 || array.length < 2){
+            return 0;
+        }
+        else  mergeSort(array,0,array.length - 1);
+        return (int)(result % 1000000007);
+    }
+    public  void mergeSort(int []array,int l,int r){
+        if(l >= r){
+            return ;
+        }
+        int mid = l + ((r - l) >> 1);
+        mergeSort(array,l,mid);
+        mergeSort(array,mid+1,r);
+        merge(array,l,mid,r);
+    }
+    public  void merge(int []array,int start,int mid,int end){
+        int []temp = new int[end - start + 1];
+        int p1 = start;
+        int p2 = mid + 1;
+        int index = 0;
+        while(p1 <= mid && p2 <=end){
+          result += array[p1] > array[p2] ? (mid - p1 + 1):0;
+          result = result > 1000000007 ? result % 1000000007 : result;
+          temp[index ++] = array[p1] <= array[p2] ? array[p1++] : array[p2++];
+        }
+        while (p1 <= mid){
+            temp[index ++] = array[p1 ++];
+        }
+        while (p2 <= end){
+            temp[index ++] = array[p2 ++];
+        }
+        for(int i = 0;i < temp.length; i++){
+            array[i + start] = temp[i];
+        }
+    }
+    
+}
