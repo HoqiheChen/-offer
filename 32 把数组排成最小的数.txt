@@ -1,0 +1,20 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+
+public class Solution {
+    public String PrintMinNumber(int [] numbers) {
+        if(numbers == null || numbers.length == 0)
+            return "";
+        int l = numbers.length;
+        String[] strings = new String[l];
+        for(int i = 0;i < l;i++){
+            strings[i] = String.valueOf(numbers[i]);
+        }
+        Arrays.sort(strings,(s1,s2)->(s1+s2).compareTo(s2+s1));
+        StringBuilder sb = new StringBuilder();
+        for(int i = 0;i < l;i++){
+            sb.append(strings[i]);
+        }
+        return sb.toString();
+    }
+}

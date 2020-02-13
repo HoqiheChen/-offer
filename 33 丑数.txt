@@ -1,0 +1,19 @@
+public class Solution {
+    public int GetUglyNumber_Solution(int index) {
+        if(index <= 6)
+            return index;
+        int[] dp = new int[index];
+        dp[0] = 1;
+        int base2 = 0,base3 = 0,base5 = 0;
+        for(int i = 1;i < index;i ++){
+            int res2 = dp[base2] * 2;
+            int res3 = dp[base3] * 3;
+            int res5 = dp[base5] * 5;
+            dp[i] = Math.min(res2,Math.min(res3,res5));
+            if(dp[i] == res2) base2 ++;
+            if(dp[i] == res3) base3 ++;
+            if(dp[i] == res5) base5 ++;
+        }
+        return dp[index-1];
+    }
+}
