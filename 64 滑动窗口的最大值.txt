@@ -1,0 +1,22 @@
+import java.util.PriorityQueue;
+import java.util.ArrayList;
+public class Solution {
+    public ArrayList<Integer> maxInWindows(int [] num, int size)
+    {
+        ArrayList<Integer> res = new ArrayList<>();
+        if(num.length == 0 || size == 0 || size > num.length){
+            return res;
+        }
+        PriorityQueue<Integer> bigHeap = new PriorityQueue<>((o1,o2)->(o2-o1));
+        for(int i = 0; i < size;i ++){
+            bigHeap.add(num[i]);
+        }
+        res.add(bigHeap.peek());
+        for(int i = 0,j = i + size;j < num.length;i++,j++){
+            bigHeap.remove(num[i]);
+            bigHeap.add(num[j]);
+            res.add(bigHeap.peek());
+        }
+        return res;
+    }
+}
