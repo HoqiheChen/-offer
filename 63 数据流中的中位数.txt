@@ -1,0 +1,27 @@
+import java.util.PriorityQueue;
+public class Solution {
+    static int N = 0;
+    static PriorityQueue<Integer> leftHeap = new PriorityQueue<>((o1,o2)->(o2-o1));
+    static PriorityQueue<Integer> rightHeap = new PriorityQueue<>();
+    
+    public void Insert(Integer num) {
+        if(N % 2 == 0){
+            leftHeap.add(num);
+            rightHeap.add(leftHeap.poll());
+        }else{
+            rightHeap.add(num);
+            leftHeap.add(rightHeap.poll());
+        }
+        N ++;
+    }
+
+    public Double GetMedian() {
+        if(N % 2 ==0){
+            return (leftHeap.peek()+rightHeap.peek())/2.0;
+        }else{
+            return (double)rightHeap.peek();
+        }
+    }
+
+
+}

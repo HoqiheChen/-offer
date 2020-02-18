@@ -1,0 +1,34 @@
+/*
+public class TreeNode {
+    int val = 0;
+    TreeNode left = null;
+    TreeNode right = null;
+
+    public TreeNode(int val) {
+        this.val = val;
+
+    }
+
+}
+*/
+public class Solution {
+    int count = 0;
+    TreeNode res;
+    TreeNode KthNode(TreeNode pRoot, int k)
+    {
+        midOrder(pRoot,k);
+        return res;
+    }
+    void midOrder(TreeNode root,int k){
+        if(root == null || count >= k){
+            return;
+        }
+        midOrder(root.left,k);
+        count ++;
+        if(count == k){
+            res = root;
+        }
+        midOrder(root.right,k);
+    }
+
+}
