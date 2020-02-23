@@ -1,0 +1,17 @@
+public class Solution {
+    public int Add(int num1,int num2) {
+        while(num2 != 0){
+            int sum = num1 ^ num2;
+            int carry = (num1 & num2) << 1;
+            num1 = sum;
+            num2 = carry;
+        }
+        return num1;
+    }
+}
+
+/*
+按位相加时，0和1相加等于1，0和0、1和1相加等于1，与^运算的结果相同，因此可以使用^运算得到相加结果（不考虑进位情况下）记为sum = num1 ^ num2；
+考虑进位情况，只有在1和1相加时才会产生进位，0和0、0和1相加并不会，则该结果与&运算得到的结果相同，可以使用&运算得到进位情况记为，但进位通常是和左边的一位进行相加，所以需要对得到的结果进行左移，则进位情况carry = (num1 & num2) << 1；
+得到sum和carry后，将两者相加即为所需的结果，那么就可以令num1 = sum，num2 = carry，重复前面两个步骤，直到不产生进位为止。
+*/
